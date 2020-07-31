@@ -58,8 +58,40 @@ for j in range(len(xc)):
     intensity_list.append(intensity_row)
 
 #HEATMAP OUTPUT    
-intensity=np.array(intensity_list)
-plt.pcolormesh(x_mesh,y_mesh,intensity)
-plt.plot(x,y,'ro')
-plt.colorbar()
+# intensity=np.array(intensity_list)
+# plt.pcolormesh(x_mesh,y_mesh,intensity)
+# plt.plot(x,y,'ro')
+# plt.colorbar()
+# plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+
+
+# x = np.random.rayleigh(50, size=5000)
+# y = np.random.rayleigh(50, size=5000)
+# print(len(x))
+
+# plt.hist2d(x,y, bins=[np.arange(0,400,5),np.arange(0,300,5)])
+
+# fig, axl = plt.subplots(figsize=(20,20))
+
+img = Image.open("./../Pictures/Screenshot from 2020-07-13 13-35-15.png")
+reScale1 = img.size
+reScale = (reScale1[0]/x_max, reScale1[1]/y_max)
+print(reScale)
+
+for count in range (0,len(x)):
+    x[count] = x[count] * reScale[0]
+    y[count] = y[count] * reScale[1]
+# img2 = img.resize((np.array(img.size)/10).astype(int))
+
+
+
+plt.hist2d(x,y, bins=[np.arange(0,reScale1[0], 5),np.arange(0,reScale1[1], 5)], cmin=1)
+
+plt.gca().invert_yaxis()
+plt.imshow(img,  aspect ='auto')
 plt.show()
