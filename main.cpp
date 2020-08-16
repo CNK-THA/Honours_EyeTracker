@@ -19,6 +19,7 @@ void gaze_point_callback(tobii_gaze_point_t const *gaze_point, void *user_data) 
     auto end = std::chrono::high_resolution_clock::now();
     auto dur = end - begin;
     auto ms = std::chrono::duration_cast<std::chrono::microseconds>(dur).count();
+	//miroseconds timeframe, could due to each computer??
 
     
 
