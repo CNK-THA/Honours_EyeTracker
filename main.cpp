@@ -14,6 +14,8 @@ int count = 0; //how many readings have been made so far
 
 std::ofstream outputFile;
 
+
+
 void gaze_point_callback(tobii_gaze_point_t const *gaze_point, void *user_data) {
     
     auto end = std::chrono::high_resolution_clock::now();
@@ -27,10 +29,13 @@ void gaze_point_callback(tobii_gaze_point_t const *gaze_point, void *user_data) 
         printf("Reading %d, At time %ld, Gaze point: %f, %f\n", count, ms,
                gaze_point->position_xy[0],
                gaze_point->position_xy[1]);
-			   
-		if ( std::filesystem::exists("read.txt")) {
+		
+		std::ifstream myfile("read.txt");
+		//ifstream f("read.txt");
+		if (myfile.good()) {
 			outputFile << count << ',' << ms << ',' << gaze_point->position_xy[0]
-            << ',' << gaze_point->position_xy[1] << ',' << 'next' << std::endl;
+            << ',' << gaze_point->position_xy[1] << ',' << "next" << std::endl;
+			 remove( "read.txt" );
 			
 		} else {
 			outputFile << count << ',' << ms << ',' << gaze_point->position_xy[0]
@@ -72,8 +77,9 @@ int main() {
     error = tobii_gaze_point_subscribe(device, gaze_point_callback, 0);
     assert(error == TOBII_ERROR_NO_ERROR);
 
-    int is_running = 1000; // in this sample, exit after some iterations, 1000 is 10 seconds roughly
-    while (--is_running > 0) {
+    //int is_running = 1000; // in this sample, exit after some iterations, 1000 is 10 seconds roughly
+    //while (--is_running > 0) {
+    while(true) {
         error = tobii_wait_for_callbacks(1, &device);
         assert(error == TOBII_ERROR_NO_ERROR || error == TOBII_ERROR_TIMED_OUT);
 

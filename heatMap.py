@@ -133,7 +133,7 @@ class App(tk.Tk):
         self.bind("<p>",lambda event, key='p':self.write_pressed(key))
         self.bind("<r>", lambda event, key='r': self.write_pressed(key))
 
-        file = open("test.txt", "a")
+        file = open("userResponse.txt", "a")
         file.write('imageFileID' + ',' + 'userResponse' + ',' + 'timeTaken' + '\n')
         file.close()
 
@@ -144,7 +144,7 @@ class App(tk.Tk):
 
     def write_pressed(self, key):
         self.keyPressed = True
-        file = open("test.txt", "a")
+        file = open("userResponse.txt", "a")
         timeTook = str(datetime.now() - self.timeNow).split(':')[2]
         file.write(str(self.track_img_ndex) + ',' + key + ',' + timeTook + '\n')
         file.close()
@@ -156,12 +156,17 @@ class App(tk.Tk):
         self.timeNow = datetime.now()
 
 
-        if not self.keyPressed and self.keyPressed != None: #could also capture how long it took participants to click
-            file = open("test.txt", "a")
+        if not self.keyPressed and self.keyPressed != None:
+            file = open("UserResponse.txt", "a")
             file.write(str(self.track_img_ndex) + ',' + '-' + ',' + str(self.delay) + '\n')
             file.close()
+            file = open('read.txt', 'w')
+            file.close()
+
 
         self.keyPressed = False #Reset it back
+
+
 
         if self.track_img_ndex < len(self.pictures):
             x = self.pictures[self.track_img_ndex]
@@ -191,12 +196,13 @@ class App(tk.Tk):
 
 
 
-delay = 3500 #timebefore moving on no response
+delay = 5000 #timebefore moving on no response
 # image_files = ["./Phishing emails/4 December CommBank Alert.jpg",
 #      "./Phishing emails/051119-commbiz-phish_50split_l.png",
 #      "./Phishing emails/120220-confirm-account-phish2_50split_l.png"]
-dir_path = os.path.dirname(os.path.realpath(__file__)) + '\Phishing emails\*.*'
+dir_path = os.path.dirname(os.path.realpath(__file__)) + '\Phishing emails\*.*' #forward slashes for Linux directory, backward slashes for windows
 image_files = glob.glob(dir_path)
+
 
 app = App(image_files, delay)
 app.show_slides()
