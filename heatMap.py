@@ -120,7 +120,7 @@ class App(tk.Tk):
         tk.Tk.__init__(self)
         self.w = self.winfo_screenwidth()
         self.h = self.winfo_screenheight()
-        self.overrideredirect(1)
+        #self.overrideredirect(1)
         self.geometry("%dx%d+0+0" % (self.w, self.h))
         self.delay = delay
         self.pictures = []
@@ -133,7 +133,7 @@ class App(tk.Tk):
         self.bind("<p>",lambda event, key='p':self.write_pressed(key))
         self.bind("<r>", lambda event, key='r': self.write_pressed(key))
 
-        file = open("userResponse.txt", "a")
+        file = open("UserResponse.txt", "a")
         file.write('imageFileID' + ',' + 'userResponse' + ',' + 'timeTaken' + '\n')
         file.close()
 
@@ -144,10 +144,17 @@ class App(tk.Tk):
 
     def write_pressed(self, key):
         self.keyPressed = True
-        file = open("userResponse.txt", "a")
+        file = open("UserResponse.txt", "a")
         timeTook = str(datetime.now() - self.timeNow).split(':')[2]
         file.write(str(self.track_img_ndex) + ',' + key + ',' + timeTook + '\n')
         file.close()
+        #if timeTook >= 20.0:
+        #    file.write(str(self.track_img_ndex) + ',' + '-' + ',' + str(self.delay) + '\n')
+        #    file.close()
+        file = open('read.txt', 'w')
+        file.close()
+        #else:
+        
 
         self.show_slides()
 
@@ -156,12 +163,12 @@ class App(tk.Tk):
         self.timeNow = datetime.now()
 
 
-        if not self.keyPressed and self.keyPressed != None:
-            file = open("UserResponse.txt", "a")
-            file.write(str(self.track_img_ndex) + ',' + '-' + ',' + str(self.delay) + '\n')
-            file.close()
-            file = open('read.txt', 'w')
-            file.close()
+        #if not self.keyPressed and self.keyPressed != None:
+        #    file = open("UserResponse.txt", "a")
+        #    file.write(str(self.track_img_ndex) + ',' + '-' + ',' + str(self.delay) + '\n')
+        #    file.close()
+        #    file = open('read.txt', 'w')
+        #    file.close()
 
 
         self.keyPressed = False #Reset it back
@@ -187,7 +194,7 @@ class App(tk.Tk):
             self.picture_display.config(image=new_img)
             self.picture_display.image = new_img
             self.title(os.path.basename(x))
-            self.after(self.delay, self.show_slides) #FIX THIS RUSHING FORWARD FROM PREVIOUS PRESSING.
+            #self.after(self.delay, self.show_slides) #FIX THIS RUSHING FORWARD FROM PREVIOUS PRESSING.
 
         else:
             print("End of list. Experiment completed!")
@@ -196,16 +203,19 @@ class App(tk.Tk):
 
 
 
-delay = 5000 #timebefore moving on no response
+delay = 20000 #timebefore moving on no response, 20 seconds
 # image_files = ["./Phishing emails/4 December CommBank Alert.jpg",
 #      "./Phishing emails/051119-commbiz-phish_50split_l.png",
 #      "./Phishing emails/120220-confirm-account-phish2_50split_l.png"]
-dir_path = os.path.dirname(os.path.realpath(__file__)) + '\Phishing emails\*.*' #forward slashes for Linux directory, backward slashes for windows
+dir_path = os.path.dirname(os.path.realpath(__file__)) + '/Phishing emails/*.*' #forward slashes for Linux directory, backward slashes for windows
 image_files = glob.glob(dir_path)
 
 
+
 app = App(image_files, delay)
+app.focus_set()
 app.show_slides()
 app.mainloop()
+
 
 
