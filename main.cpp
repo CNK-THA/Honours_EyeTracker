@@ -27,8 +27,18 @@ void gaze_point_callback(tobii_gaze_point_t const *gaze_point, void *user_data) 
         printf("Reading %d, At time %ld, Gaze point: %f, %f\n", count, ms,
                gaze_point->position_xy[0],
                gaze_point->position_xy[1]);
-        outputFile << count << ',' << ms << ',' << gaze_point->position_xy[0]
+			   
+		if ( std::filesystem::exists("read.txt")) {
+			outputFile << count << ',' << ms << ',' << gaze_point->position_xy[0]
+            << ',' << gaze_point->position_xy[1] << ',' << 'next' << std::endl;
+			
+		} else {
+			outputFile << count << ',' << ms << ',' << gaze_point->position_xy[0]
             << ',' << gaze_point->position_xy[1] << std::endl;
+			
+		}
+			
+        
         count++;
     }
         
