@@ -22,6 +22,7 @@ with open('GazeReading.csv') as csvFile:
             x = []
             y = []
 
+print('hehehe')
 ##print(data)
 
             
@@ -92,7 +93,7 @@ import glob
 # plt.hist2d(x,y, bins=[np.arange(0,400,5),np.arange(0,300,5)])
 # fig, axl = plt.subplots(figsize=(20,20))
 
-dir_path = os.path.dirname(os.path.realpath(__file__)) + '\Phishing emails\*.*' #forward slashes for Linux directory, backward slashes for windows
+dir_path = os.path.dirname(os.path.realpath(__file__)) + '/Phishing emails/*.*' #forward slashes for Linux directory, backward slashes for windows
 image_files = glob.glob(dir_path)
 ##print(image_files)
 
@@ -100,9 +101,15 @@ countIndex = 0
 x = None
 y = None
 
+print('wer')
+
+print(dir_path)
+print(image_files)
+
 
 for image in image_files:
     thisImage = data[countIndex] #gives array containing the tuple
+    countIndex += 1
     x = thisImage[0]
     y = thisImage[1]
     img = Image.open(image)
@@ -112,7 +119,7 @@ for image in image_files:
     y_max = max(y)
     reScale = (reScale1[0]/x_max, reScale1[1]/y_max)
 
-    
+
     
 
     for count in range (0,len(x)):
