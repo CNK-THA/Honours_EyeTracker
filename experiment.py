@@ -12,13 +12,12 @@ from datetime import datetime
 
 
 class App(tk.Tk):
-    def __init__(self, image_files, delay):
+    def __init__(self, image_files):
         tk.Tk.__init__(self)
         self.w = self.winfo_screenwidth()
         self.h = self.winfo_screenheight()
         self.overrideredirect(1)
         self.geometry("%dx%d+0+0" % (self.w, self.h))
-        self.delay = delay
         self.pictures = []
         self.track_img_ndex = 0
         for img in image_files:
@@ -53,7 +52,7 @@ class App(tk.Tk):
 
 
         if not self.keyPressed and self.keyPressed != None:
-            file = open("UserResponse.txt", "a")
+            file = open("userResponse.txt", "a")
             file.write(str(self.track_img_ndex) + ',' + '-' + ',' + str(self.delay) + '\n')
             file.close()
             file = open('read.txt', 'w')
@@ -83,7 +82,7 @@ class App(tk.Tk):
             self.picture_display.config(image=new_img)
             self.picture_display.image = new_img
             self.title(os.path.basename(x))
-            self.after(self.delay, self.show_slides) #FIX THIS RUSHING FORWARD FROM PREVIOUS PRESSING.
+##            self.after(self.delay, self.show_slides) #FIX THIS RUSHING FORWARD FROM PREVIOUS PRESSING.
 
         else:
             print("End of list. Experiment completed!")
@@ -91,7 +90,7 @@ class App(tk.Tk):
 
 
 if __name__ == "__main__":
-    delay = 20000 #timebefore moving on no response, 20 seconds
+##    delay = 20000 #timebefore moving on no response, 20 seconds
     # image_files = ["./Phishing emails/4 December CommBank Alert.jpg",
     #      "./Phishing emails/051119-commbiz-phish_50split_l.png",
     #      "./Phishing emails/120220-confirm-account-phish2_50split_l.png"]
@@ -99,9 +98,7 @@ if __name__ == "__main__":
     image_files = glob.glob(dir_path)
 
 
-    app = App(image_files, delay)
+    app = App(image_files)
     app.show_slides()
     app.mainloop()
 
-
-e
