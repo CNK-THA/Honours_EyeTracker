@@ -1,5 +1,4 @@
 imageFileID,userResponse,timeTaken
-imageFileID,userResponse,timeTaken
 1,p,21.988196
 2,p,31.112552
 3,p,21.464975
