@@ -14,13 +14,17 @@ with open('GazeReading.csv') as csvFile:
     for row in readCSV:
         x.append(float(row[2]))
         y.append(float(row[3]))
-        if len(row) == 5: #ignoring the first one?
+        if len(row) == 5 and row[4] == 'next': #has the word next
             image.append(x)
             image.append(y)
             data.append(image)
             image = []
             x = []
             y = []
+
+
+#                        First Image                    Second Image
+#data contains [ [[x1, x2, x3], [y1, y2, y3]], [[x1, x2, x3], [y1, y2, y3]] ... ]
 
 print('hehehe')
 ##print(data)
@@ -101,10 +105,10 @@ countIndex = 0
 x = None
 y = None
 
-print('wer')
-
-print(dir_path)
-print(image_files)
+##print('wer')
+##
+##print(dir_path)
+##print(image_files)
 
 
 for image in image_files:
@@ -117,22 +121,31 @@ for image in image_files:
 
     x_max = max(x)
     y_max = max(y)
-    reScale = (reScale1[0]/x_max, reScale1[1]/y_max)
+    print('max x', x_max)
+    print('max y', y_max)
+##    reScale = (rescale[0]/1, rescale[1]/1)
+##    print(reScale)
+    print(reScale1, 'image size')
 
 
     
-
+##    r = 0
     for count in range (0,len(x)):
-        x[count] = x[count] * reScale[0]
-        y[count] = y[count] * reScale[1]
-
+##        print(x[count], y[count])
+        x[count] = x[count] * reScale1[0]
+        y[count] = y[count] * reScale1[1]
+##        print('becomes', x[count], y[count])
+##        r+=1
+##        if( r == 40):
+##            break
+##    break
 
 
 # img2 = img.resize((np.array(img.size)/10).astype(int)) UNUSED
 
 
 
-    plt.hist2d(x,y, bins=[np.arange(0,reScale1[0], 10),np.arange(0,reScale1[1], 10)], cmin=1)
+    plt.hist2d(x,y, bins=[np.arange(0,reScale1[0], 10),np.arange(0,reScale1[1], 10)], cmin=7) #5 is how large the dots are, cmin is the area of interest
     plt.gca().invert_yaxis()
     plt.imshow(img,  aspect ='auto')
     plt.show()

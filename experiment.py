@@ -97,8 +97,12 @@ if __name__ == "__main__":
     dir_path = os.path.dirname(os.path.realpath(__file__)) + '\Phishing emails\*.*' #forward slashes for Linux directory, backward slashes for windows
     image_files = glob.glob(dir_path)
 
+##    print(image_files)
+    for file in image_files:
+        print(file.split('\\')[5])
 
-    app = App(image_files)
-    app.show_slides()
-    app.mainloop()
+
+    #app = App(image_files)
+    #app.show_slides()
+    #app.mainloop()
 
