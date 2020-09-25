@@ -98,11 +98,11 @@ if __name__ == "__main__":
     image_files = glob.glob(dir_path)
 
 ##    print(image_files)
-    for file in image_files:
-        print(file.split('\\')[5])
+##    for file in image_files:
+##        print(file.split('\\')[5])
 
 
-    #app = App(image_files)
-    #app.show_slides()
-    #app.mainloop()
+    app = App(image_files)
+    app.show_slides()
+    app.mainloop()
 
