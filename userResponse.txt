@@ -1,0 +1,12 @@
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
+imageFileID,userResponse,timeTaken
