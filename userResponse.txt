@@ -40,3 +40,5 @@ imageFileID,userResponse,timeTaken
 39,p,00.691130
 40,p,00.859783
 41,p,00.694796
+imageFileID,userResponse,timeTaken
+1,p,02.644171

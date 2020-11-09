@@ -91,9 +91,9 @@ class App(tk.Tk):
 
 if __name__ == "__main__":
 
-    while(True):
-        input('Image file opened, ready to begin experiment!!')
-        break
+##    while(True):
+##        input('Image file opened, ready to begin experiment!!')
+##        break
     
 ##    delay = 20000 #timebefore moving on no response, 20 seconds
     # image_files = ["./Phishing emails/4 December CommBank Alert.jpg",
@@ -102,8 +102,8 @@ if __name__ == "__main__":
 
 
 #THESE ARE REAL
-##    dir_path = os.path.dirname(os.path.realpath(__file__)) + '\Phishing emails\*.*' #forward slashes for Linux directory, backward slashes for windows
-##    image_files = glob.glob(dir_path)
+    dir_path = os.path.dirname(os.path.realpath(__file__)) + '\Phishing emails\*.*' #forward slashes for Linux directory, backward slashes for windows
+    image_files = glob.glob(dir_path)
 
 #NOT THESE
 ##    print(image_files)
@@ -111,7 +111,7 @@ if __name__ == "__main__":
 ##        print(file.split('\\')[5])
 
 #THESE ARE REAL AS WELL
-##    app = App(image_files)
-##    app.show_slides()
-##    app.mainloop()
+    app = App(image_files)
+    app.show_slides()
+    app.mainloop()
 
